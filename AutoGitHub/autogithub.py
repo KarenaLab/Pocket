@@ -1,4 +1,4 @@
-# EKC GitHub Organizer -------------------------------------------------
+# GitHub Organizer (P249) ----------------------------------------------
 
 # Versions -------------------------------------------------------------
 # 01 - Dec 05th, 2022 - starter.
@@ -326,12 +326,10 @@ print(" ****              Samsung Galaxy Book 2 360            ****\n")
 # github: Folder from github (Destiny),
 # module: File(s) to be sync with C:\python_modules
 
-
 # External information
 filename = "paths_for_sync.txt"
 buffer = read_txt(filename)
 github_prefix = pc_choose()
-
 
 # Getting information from modules folder
 module_lake = files_list(path_modules)
@@ -352,7 +350,6 @@ for i in range(0, len(buffer)):
     root_files = transfer_files(files_list(), types)
     github_files = transfer_files(files_list(path_github), types)
     module_files = prepare_module_files(data["module"])
-
 
     # From project to GitHub    
     for filename in root_files:
@@ -412,8 +409,6 @@ for i in range(0, len(buffer)):
     if(update == True):
         print("")
 
-    
-        
 
 # Cleaning Project Folder ----------------------------------------------
 print("\n")
