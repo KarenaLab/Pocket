@@ -29,8 +29,14 @@ import shutil
 import socket
 from time import sleep
 
+#import colorama
+#from colorama import Fore, Back, Style
+
+
 
 # Setup/Config
+#colorama.init(autoreset=True)
+
 path_script = os.getcwd()
 path_modules = r"c:\python_modules"
 path_projects = r"D:\01 - Projects Binder"
