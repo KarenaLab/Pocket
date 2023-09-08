@@ -11,7 +11,8 @@
 # 07 - Feb 10th, 2023 - Sync github and module update
 #
 # 10 - Mar 21th, 2023 - Adding two destinies (Zen-14 and Book2)
-# 11 - 
+# 11 - May 02nd, 2023 - Adjust for new github settings
+# 12 - Sep 07th, 2023 - Add sum up of actions
 
 
 # Upgrades
@@ -340,7 +341,10 @@ github_prefix = pc_choose()
 # Getting information from modules folder
 module_lake = files_list(path_modules)
 
-#module_source = transfer_files(module_source, ".py")
+new_github = 0
+mod_github = 0
+new_module = 0
+mod_module = 0
 
 for i in range(0, len(buffer)):
     data = buffer[i]
@@ -368,6 +372,7 @@ for i in range(0, len(buffer)):
             destiny = os.path.join(path_github, filename_noindex)
             shutil.copyfile(source, destiny)
             print_info(f'  >>> New file at github: "{filename_noindex}"')
+            new_github = new_github + 1
 
         else:
             # File exists in github = Check if need to update
@@ -383,6 +388,7 @@ for i in range(0, len(buffer)):
                 destiny = os.path.join(path_github, filename_noindex)
                 shutil.copyfile(source, destiny)
                 print_info(f'  >>> Updated file at github: "{filename_noindex}"')
+                mod_github = mod_github + 1
 
 
         if(module_files.count(filename_noindex) == 1):
@@ -395,6 +401,7 @@ for i in range(0, len(buffer)):
                 destiny = os.path.join(path_modules, filename_noindex)
                 shutil.copyfile(source, destiny)
                 print_info(f'  >>> New file at modules lake: "{filename_noindex}"')
+                new_module = new_module + 1
 
             else:
                 # File exists in modules lake = Check if need to update
@@ -410,15 +417,22 @@ for i in range(0, len(buffer)):
                     destiny = os.path.join(path_modules, filename_noindex)
                     shutil.copyfile(source, destiny)
                     print_info(f'  >>> Updated file at modules lake: "{filename_noindex}"')
+                    mod_module = mod_module + 1
 
                
     if(update == True):
         print("")
 
 
-# Cleaning Project Folder ----------------------------------------------
-print("\n")
-remove_temp_folders(path_projects)
+# Print sum up of actions ----------------------------------------------
+print("")
+print(f">  New files added to GitHub: {new_github}")
+print(f">    Files updated at GitHub: {mod_github}")
+print(f"> New files added to modules: {new_module}")
+print(f">   Files updated at modules: {mod_module} \n")
 
+# Cleaning Project Folder ----------------------------------------------
+print("")
+remove_temp_folders(path_projects)
 
 # end
