@@ -26,7 +26,7 @@ for f in files_list:
 
 # Remove not python (.py) files
 if(len(new_list) > 0):
-    print('\n Personal modules at "{path}"') 
+    print(f'\n Personal modules at "{path}"') 
 
     # Updating database
     files_list = new_list[:]
