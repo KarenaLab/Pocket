@@ -59,12 +59,39 @@ def read_folders(path):
     return folder_list
 
 
+def left_join(left, right):
+    """
+    Performs **left_join** between two lists.
+
+    """
+    l_join = list()
+
+    for i in left:
+        if(right.count(i) == 0):
+            l_join.append(i)
+
+    return l_join
+
+
+def inner_join(left, right):
+    """
+    Performs **inner_join** between two lists.
+
+    """
+    i_join = list()
+
+    for i in left:
+        if(right.count(i) > 0):
+            i_join.append(i)
+
+    return i_join
+
 
 
 # Program --------------------------------------------------------------
-
-
-
+source = "D:\\"    
+destiny = ""  
+verbose = True
 
 # end
 
