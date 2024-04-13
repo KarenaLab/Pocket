@@ -242,6 +242,10 @@ def backup(path_source, path_destiny, verbose=True):
 
 
 def get_size(verbose=True):
+    """
+
+
+    """
     # Get the total from path
     total_size = 0
     for dir_path, dir_names, dir_files in os.walk(os.getcwd()):
@@ -250,22 +254,32 @@ def get_size(verbose=True):
                 total_size = total_size + os.path.getsize(os.path.join(dir_path, f))
 
     if(verbose == True):
-        total_print = total_size
-        size_table = ["B", "KB", "MB", "GB", "TB", "PB"]
-
-        cycle_count = 0
-        while(True):
-            if(int(total_print) > 1000):
-                total_print = total_print / 1024
-                cycle_count = cycle_count + 1
-
-            else:
-                break
-
-        print(f" > Folder size: {total_print:.2f} {size_table[cycle_count]}")
+        print_size(total_size)
 
 
     return total_size
+    
+
+def print_size(size):
+    """
+
+
+    """
+    size_table = ["B", "KB", "MB", "GB", "TB", "PB"]
+
+    cycle_count = 0
+    while(True):
+        if(int(size) > 1000):
+            size = size / 1024
+            cycle_count = cycle_count + 1
+
+        else:
+            break
+
+    print(f" > Folder size: {size:.2f} {size_table[cycle_count]}")
+
+    return size
+        
     
 
 
@@ -287,15 +301,38 @@ path_destiny = [r"E:\Book2\01 - Projects Binder",
                 r"E:\Book2\10 - Images",
                 r"E:\Book2\99 - INBOX"]
 
-"""
+
+# Backup Files
 for source, destiny in zip(path_source, path_destiny):
     backup(source, destiny)
     #_ = input()
-"""
 
+"""
+# Log with sizes
 backup_size = 0
 for path in path_source:
     os.chdir(path)
-    backup_size = backup_size + get_size(verbose=False)
+    path_size = get_size(verbose=False)
+    backup_size = backup_size + path_size
+"""
+    
 
 # end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
