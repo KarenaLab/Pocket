@@ -319,20 +319,3 @@ for path in path_source:
 
 # end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
