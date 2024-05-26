@@ -260,7 +260,7 @@ def get_size(verbose=True):
     return total_size
     
 
-def print_size(size):
+def calc_size(size):
     """
 
 
@@ -276,12 +276,10 @@ def print_size(size):
         else:
             break
 
-    print(f" > Folder size: {size:.2f} {size_table[cycle_count]}")
+    text = f"{size:.2f} {size_table[cycle_count]}"
 
-    return size
+    return text
         
-    
-
 
 # Program --------------------------------------------------------------
 
@@ -307,15 +305,16 @@ for source, destiny in zip(path_source, path_destiny):
     backup(source, destiny)
     #_ = input()
 
-"""
+
 # Log with sizes
 backup_size = 0
-for path in path_source:
+backup_address = [r"E:\Book2", r"E:\Storage_OUT"]
+for path in backup_address:
     os.chdir(path)
     path_size = get_size(verbose=False)
     backup_size = backup_size + path_size
-"""
-    
+    print(f"{path} has {calc_size(backup_size)}")
 
+    
 # end
 
