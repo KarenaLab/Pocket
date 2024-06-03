@@ -313,7 +313,7 @@ for path in backup_address:
     os.chdir(path)
     path_size = get_size(verbose=False)
     backup_size = backup_size + path_size
-    print(f"{path} has {calc_size(backup_size)}")
+    print(f" > {path} has {calc_size(backup_size)}")
 
     
 # end
