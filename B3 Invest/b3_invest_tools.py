@@ -1,8 +1,8 @@
-# Name [Pxxx]
+# Name [P444] - B3 Investiments portfolio control
 # (optional) Short description
 
 # Versions
-# 01 - Date - Starter
+# 01 - Nov 20th, 2024 - Starter
 # 02 -
 
 
@@ -11,8 +11,6 @@
 
 
 # Libraries
-from collections import namedtuple
-
 import numpy as np
 import pandas as pd
 import scipy.stats as st
@@ -22,12 +20,25 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def name():
+def reset_portfolio():
     """
-    Description of the function
-    Information about variables and **kwargs
+    Reset the portfolio dataframe.
+    Use it carefully.
 
     """
+    data = pd.DataFrame(data=[],
+                        columns=["date", "stocks", "qty", "value", "ibov"])
 
-    return None    
+    return data
+
+
+def update_b3():
+    pass
+
+    return None
+
+
+
+
+
 
