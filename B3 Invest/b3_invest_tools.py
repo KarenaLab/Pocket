@@ -1,5 +1,4 @@
 # Name [P444] - B3 Investiments portfolio control
-# (optional) Short description
 
 # Versions
 # 01 - Nov 20th, 2024 - Starter
@@ -38,7 +37,7 @@ def read_portfolio():
 
     """
     filename = "portfolio_b3.csv"
-    data = pd.read_csv(filename, sep=",", encoding="utf-8")  
+    data = pd.read_csv(filename, index_col=0, sep=",", encoding="utf-8")  
 
     return data
 
