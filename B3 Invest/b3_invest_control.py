@@ -1,11 +1,8 @@
-# Name [Pxxx]
-# (optional) Short description of the program/module.
-
+# Name [P444] - B3 Investments portfolio control
 
 # Libraries
 import os
 import sys
-from collections import namedtuple
 
 import numpy as np
 import pandas as pd
@@ -16,6 +13,7 @@ import matplotlib.pyplot as plt
 
 # Personal modules
 sys.path.append(r"c:\python_modules")
+from b3_invest_tools import read_portfolio
 
 
 # Functions
@@ -27,7 +25,7 @@ sys.path.append(r"c:\python_modules")
 
 
 # Program --------------------------------------------------------------
-
+data = read_portfolio()
 
 
 
