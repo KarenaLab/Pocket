@@ -32,10 +32,21 @@ def reset_portfolio():
     return data
 
 
-def update_b3():
-    pass
+def read_portfolio():
+    """
+    Import data from portfolio as a dataframe.
 
-    return None
+    """
+    filename = "portfolio_b3.csv"
+    data = pd.read_csv(filename, sep=",", encoding="utf-8")  
+
+    return data
+
+
+
+
+
+
 
 
 
