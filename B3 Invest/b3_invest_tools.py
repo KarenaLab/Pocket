@@ -72,8 +72,8 @@ def add_operation(DataFrame):
 def view_portfolio(DataFrame):
   #       date    stock      qty      value        ibov 
   # 2024-01-01   ABCD12   99.999   1.000,00   9.999.999
-  #12345678901234567890123456789012345678901234567890123
-  #         1         2         3         4         5
+  #1234567890123456789012345678901234567890123456789012  > numeral
+  #0         1        2        2          4           5  > decimal
 
     # Header
     print("       date    stock      qty      value        ibov") 
@@ -88,6 +88,7 @@ def view_portfolio(DataFrame):
 
         print(f"{date:>11s}{stock:>9s}{qty:>9s}{value:>11s}{ibov:>12s}")
 
+    # Closing line space
     print("")
 
     return None
