@@ -27,7 +27,7 @@ def _reset_portfolio():
 
     """
     data = pd.DataFrame(data=[],
-                        columns=["date", "stocks", "qty", "value", "ibov"])
+                        columns=["date", "stocks", "qty", "value", "today", "ibov"])
 
     return data
 
@@ -63,8 +63,13 @@ def add_operation(DataFrame):
     ibov = input(" > Inform ibov value at the moment of purchase/sell: ")
     print("")
 
+    # Append data to DataFrame
     row = len(list(DataFrame.index))
-    DataFrame.loc[row] = [date, stock, qty, value, ibov]
+    DataFrame.loc[row, "date"] = date
+    DataFrame.loc[row, "stocks"] = stock
+    DataFrame.loc[row, "qty"] = int(qty)
+    DataFrame.loc[row, "value"] = float(value)
+    DataFrame.loc[row, "ibov"] = int(ibov)
     
     return DataFrame
 
