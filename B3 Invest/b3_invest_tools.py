@@ -69,7 +69,23 @@ def add_operation(DataFrame):
 
 
 def view_portfolio(DataFrame):
-    print(DataFrame)
+  #       date    stock      qty      value        ibov 
+  # 2024-01-01   ABCD12   99.999   1.000,00   9.999.999
+  #12345678901234567890123456789012345678901234567890123
+  #         1         2         3         4         5
+
+    print("       date    stock      qty      value        ibov")
+
+    for row in DataFrame.index:
+        date = DataFrame.loc[row, "date"]
+        stock = DataFrame.loc[row, "stocks"]
+        qty = DataFrame.loc[row, "qty"]
+        value = DataFrame.loc[row, "value"]
+        ibov = DataFrame.loc[row, "ibov"]
+
+        print(date, stock, qty, value, ibov)
+
+    print("")
 
     return None
 
