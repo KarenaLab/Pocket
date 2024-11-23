@@ -6,7 +6,9 @@
 
 
 # Insights, improvements and bugfix
-#
+# 01 - Change column `value` to `purchase_value` or something simular,
+# 02 - Add number formater: decimals fixed,
+# 03 - 
 
 
 # Libraries
@@ -64,7 +66,6 @@ def add_operation(DataFrame):
     row = len(list(DataFrame.index))
     DataFrame.loc[row] = [date, stock, qty, value, ibov]
     
-
     return DataFrame
 
 
@@ -74,16 +75,18 @@ def view_portfolio(DataFrame):
   #12345678901234567890123456789012345678901234567890123
   #         1         2         3         4         5
 
-    print("       date    stock      qty      value        ibov")
+    # Header
+    print("       date    stock      qty      value        ibov") 
 
+    # Wallet lines   
     for row in DataFrame.index:
         date = DataFrame.loc[row, "date"]
         stock = DataFrame.loc[row, "stocks"]
-        qty = DataFrame.loc[row, "qty"]
-        value = DataFrame.loc[row, "value"]
-        ibov = DataFrame.loc[row, "ibov"]
+        qty = str(DataFrame.loc[row, "qty"])
+        value = str(DataFrame.loc[row, "value"])
+        ibov = str(DataFrame.loc[row, "ibov"])
 
-        print(date, stock, qty, value, ibov)
+        print(f"{date:>11s}{stock:>9s}{qty:>9s}{value:>11s}{ibov:>12s}")
 
     print("")
 
