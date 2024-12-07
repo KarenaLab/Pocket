@@ -52,6 +52,28 @@ def read_portfolio():
     data = pd.read_csv(filename, index_col=0, sep=",", encoding="utf-8")  
 
     return data
+
+
+def consolidate_portfolio(DataFrame):
+    """
+    Gets a list of purchase and sell of stocks and consolidate it.
+
+    """
+    cols = list(DataFrame.columns)
+    wallet = dict()
+
+    for row in DataFrame.index:
+        date = DataFrame.loc[row, "date"]
+        stock = DataFrame.loc[row, "stocks"]
+        qty = int(DataFrame.loc[row, "qty"])
+        value = int(DataFrame.loc[row, "value"])
+        operation = _find_operation
+            
+
+        
+
+
+    return None
     
 
 def add_operation(DataFrame):
@@ -99,8 +121,24 @@ def view_portfolio(DataFrame):
     return None
 
 
-def update_database():
+def remove_stock(DataFrame):
+    """
+    Remove a line from portfolio.
+    Action of sell.
+    
+    """
     pass
 
     return None
+
+
+def update_database():
+    """
+    Update the data from iBovespa (BOV) daily values of stocks.
+
+    """
+    pass
+
+    return None
+
 
