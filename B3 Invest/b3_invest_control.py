@@ -23,6 +23,7 @@ sys.path.append(r"c:\python_modules")
 from b3_invest_tools import (_reset_portfolio,
                              _export_portfolio,
                              read_portfolio,
+                             consolidate_portfolio,
                              add_operation,
                              view_portfolio,
                              update_database)
@@ -42,6 +43,7 @@ data = read_portfolio()
 while(True):
     print(" > [a]dd operation")
     print(" > [v]iew portfolio")
+    print(" > [c]onsolidate portfolio")
     print(" > [s]ave portfolio")
     print(" > [u]pdate database")
     print(" > [q]uit")
@@ -58,6 +60,9 @@ while(True):
 
     if(decision == "v"):
         view_portfolio(data)
+
+    if(decision == "c"):
+        consolidate_portfolio(data)
 
     if(decision == "s"):
         _export_portfolio(data)
