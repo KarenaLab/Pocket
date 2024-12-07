@@ -8,7 +8,9 @@
 # Insights, improvements and bugfix
 # 01 - Change column `value` to `purchase_value` or something simular,
 # 02 - Add number formater: decimals fixed,
-# 03 - 
+# 03 - Add line number to `view_portfolio`, useful for `delete_operation`
+#          function,
+# 04 - 
 
 
 # Libraries
@@ -43,6 +45,25 @@ def _export_portfolio(DataFrame):
     return None
 
 
+def _find_operation(value):
+    """
+    Find the operation, if negative is a **sell**,
+    if positive is a **buy**.
+
+    """
+    if(value > 0):
+        op = "buy"
+
+    elif(value < 0):
+        op = "sell"
+
+    else:
+        op = None
+
+
+    return op
+
+
 def read_portfolio():
     """
     Import data from portfolio as a dataframe.
@@ -67,7 +88,9 @@ def consolidate_portfolio(DataFrame):
         stock = DataFrame.loc[row, "stocks"]
         qty = int(DataFrame.loc[row, "qty"])
         value = int(DataFrame.loc[row, "value"])
-        operation = _find_operation
+        operation = _find_operation(value)
+
+        print(date, stock, qty, value, operation)
 
     # Continue            
 
@@ -75,6 +98,13 @@ def consolidate_portfolio(DataFrame):
     
 
 def add_operation(DataFrame):
+    """
+    Add an operation (purchase or sell), selling could also work with
+    the `delete_operation`.
+
+    Important: Need to save the porfolio to keep information.
+
+    """
     # Data input (by user)
     date = input(" > Inform date of operation ('yyyy-mm-dd'): ")
     stock = input(" > Inform name of asset: ")
@@ -95,9 +125,17 @@ def add_operation(DataFrame):
 
 
 def delete_operation(DataFrame):
-    view_portfolio(DataFrame)
+    """
+    Remove an operation from the list. Could be used for selling or
+    register the sell as a negative stock value in `add_operation`.
 
+    Important: Need to save the portfolio to keep information.
+
+    """
+    
+    view_portfolio(DataFrame)
     line_max = np.max(DataFrame.index)
+
     while(True):
         line_remove = int(input(f" Choose line to be deleted [0~{line_max}]: "))        
         if(line_remove <= line_max):
@@ -105,17 +143,21 @@ def delete_operation(DataFrame):
             break
 
         else:
-            print(f" >>> Error: Index of range")
+            print(f" >>> Error: Index of range \n")
             
 
     return DataFrame
 
 
 def view_portfolio(DataFrame):
-  #       date    stock      qty      value        ibov 
-  # 2024-01-01   ABCD12   99.999   1.000,00   9.999.999
-  #1234567890123456789012345678901234567890123456789012  > numeral
-  #0         1        2        2          4           5  > decimal
+    """
+    Friendly viewer for portfolio DataFrame.
+    
+    """
+    #       date    stock      qty      value        ibov 
+    # 2024-01-01   ABCD12   99.999   1.000,00   9.999.999
+    #1234567890123456789012345678901234567890123456789012  > numeral
+    #0         1        2        2          4           5  > decimal
 
     # Header
     print("       date    stock      qty      value        ibov") 
