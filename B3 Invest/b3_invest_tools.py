@@ -68,10 +68,8 @@ def consolidate_portfolio(DataFrame):
         qty = int(DataFrame.loc[row, "qty"])
         value = int(DataFrame.loc[row, "value"])
         operation = _find_operation
-            
 
-        
-
+    # Continue            
 
     return None
     
@@ -93,6 +91,23 @@ def add_operation(DataFrame):
     DataFrame.loc[row, "value"] = float(value)
     DataFrame.loc[row, "ibov"] = int(ibov)
     
+    return DataFrame
+
+
+def delete_operation(DataFrame):
+    view_portfolio(DataFrame)
+
+    line_max = np.max(DataFrame.index)
+    while(True):
+        line_remove = int(input(f" Choose line to be deleted [0~{line_max}]: "))        
+        if(line_remove <= line_max):
+            DataFrame = DataFrame.drop(labels=line_remove, axis=0)
+            break
+
+        else:
+            print(f" >>> Error: Index of range")
+            
+
     return DataFrame
 
 
