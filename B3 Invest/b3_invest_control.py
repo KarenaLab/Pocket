@@ -25,6 +25,7 @@ from b3_invest_tools import (_reset_portfolio,
                              read_portfolio,
                              consolidate_portfolio,
                              add_operation,
+                             delete_operation,
                              view_portfolio,
                              update_database)
 
@@ -42,6 +43,7 @@ data = read_portfolio()
 
 while(True):
     print(" > [a]dd operation")
+    print(" > [d]elete operation"),
     print(" > [v]iew portfolio")
     print(" > [c]onsolidate portfolio")
     print(" > [s]ave portfolio")
@@ -57,6 +59,9 @@ while(True):
 
     if(decision == "a"):
         data = add_operation(data)
+
+    if(decision == "d"):
+        data = delete_operation(data)
 
     if(decision == "v"):
         view_portfolio(data)
