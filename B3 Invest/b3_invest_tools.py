@@ -34,12 +34,11 @@ def _reset_portfolio():
     return data
 
 
-def _export_portfolio(DataFrame):
+def _export_portfolio(DataFrame, filename="portfolio_b3.csv"):
     """
     Export data from dataframe portofolio to .csv
 
     """
-    filename = "portfolio_b3.csv"
     DataFrame.to_csv(filename, sep=",", encoding="utf-8")
 
     return None
