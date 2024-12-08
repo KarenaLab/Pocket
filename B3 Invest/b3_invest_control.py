@@ -82,5 +82,8 @@ while(True):
     if(decision == "q"):
         break
 
+    else:
+        print(" >>> Error: Option not at list")
+
 
 # end
