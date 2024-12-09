@@ -50,25 +50,18 @@ def _find_operation(value):
     if positive is a **buy**.
 
     """
-    if(value > 0):
-        op = "buy"
-
-    elif(value < 0):
-        op = "sell"
-
-    else:
-        op = None
-
+    if(value > 0): op = "buy"
+    elif(value < 0): op = "sell"
+    else: op = None
 
     return op
 
 
-def read_portfolio():
+def read_portfolio(filename="portfolio_b3.csv"):
     """
     Import data from portfolio as a dataframe.
 
     """
-    filename = "portfolio_b3.csv"
     data = pd.read_csv(filename, index_col=0, sep=",", encoding="utf-8")  
 
     return data
@@ -130,8 +123,7 @@ def delete_operation(DataFrame):
 
     Important: Need to save the portfolio to keep information.
 
-    """
-    
+    """    
     view_portfolio(DataFrame)
     line_max = np.max(DataFrame.index)
 
@@ -196,5 +188,4 @@ def update_database():
     pass
 
     return None
-
 
