@@ -339,7 +339,7 @@ buffer = read_txt(filename)
 github_prefix = pc_choose()
 
 # Getting information from modules folder
-module_lake = files_list(path_modules)
+#module_lake = files_list(path_modules)
 
 new_github = 0
 mod_github = 0
@@ -390,7 +390,7 @@ for i in range(0, len(buffer)):
                 print_info(f'  >>> Updated file at github: "{filename_noindex}"')
                 mod_github = mod_github + 1
 
-
+        """
         if(module_files.count(filename_noindex) == 1):
             # File to be copied to modules lake
 
@@ -418,7 +418,7 @@ for i in range(0, len(buffer)):
                     shutil.copyfile(source, destiny)
                     print_info(f'  >>> Updated file at modules lake: "{filename_noindex}"')
                     mod_module = mod_module + 1
-
+        """
                
     if(update == True):
         print("")
