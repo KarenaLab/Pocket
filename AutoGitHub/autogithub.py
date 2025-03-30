@@ -343,8 +343,7 @@ github_prefix = pc_choose()
 
 new_github = 0
 mod_github = 0
-new_module = 0
-mod_module = 0
+
 
 for i in range(0, len(buffer)):
     data = buffer[i]
@@ -428,8 +427,7 @@ for i in range(0, len(buffer)):
 print("")
 print(f">  New files added to GitHub: {new_github}")
 print(f">    Files updated at GitHub: {mod_github}")
-print(f"> New files added to modules: {new_module}")
-print(f">   Files updated at modules: {mod_module} \n")
+
 
 # Cleaning Project Folder ----------------------------------------------
 print("")
