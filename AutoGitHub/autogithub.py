@@ -1,6 +1,5 @@
 # GitHub Organizer (P249) ----------------------------------------------
 
-
 # Upgrades
 # Read an external .json/.txt/.csv with folders data - v04 [Dec 30th, 2022]
 # Automatic remove of files at github that are not at folder
@@ -147,6 +146,7 @@ def transfer_files(file_list, enable_types):
         
         enable_types.append(ext)
 
+
     # Select files with extensions enabled
     new_list = []
     for f in file_list:
@@ -281,6 +281,33 @@ def print_info(text, cut=12, connector="... ", limit=70):
     return None
 
 
+def prepare_none(string):
+    if(string == "None"):
+        string = None
+
+    return string
+
+
+def prepare_folders(path, folders):
+    f_list = [path]
+
+    if(folders != None):
+        folders = folders.split(",")
+        temp = list()
+        for i in folders:
+            i = i.strip()
+            i = i.replace(",", "")
+            i = i.replace(".", "")
+            temp.append(i)
+            
+        folders = temp[:]       
+        for f in folders:
+            f_list.append(os.path.join(path, f))
+
+
+    return f_list
+
+
 # Main program ---------------------------------------------------------
 print("\n ****  Auto Github 2 | Sync project and github folders  ****")
 print(" ****              Samsung Galaxy Book 2 360            ****\n")           
@@ -302,55 +329,62 @@ github_prefix = pc_choose()
 # Inputation and modification indexes
 new_github, mod_github = 0, 0
 
+
 for i in range(0, len(buffer)):
+    # Upload data slice from buffer (dict)
     data = buffer[i]
-    
+
     print(f'> Folder {data["name"]}')
     update = False
-   
+
     types = data["types"]
     path_root = data["root"]
     path_github = os.path.join(github_prefix, data["github"])
-    os.chdir(path_root)
-   
-    root_files = transfer_files(files_list(), types)
-    github_files = transfer_files(files_list(path_github), types)
+    folders = prepare_none(data["folders"])
+    
+    path_root = prepare_folders(path_root, folders)
+    path_github = prepare_folders(path_github, folders)
 
-    # From project to GitHub    
-    for filename in root_files:
-        filename_noindex = remove_index(filename)
+    for p_root, p_github in zip(path_root, path_github):
+        os.chdir(p_root)
+        
+        root_files = transfer_files(files_list(), types)        
+        github_files = transfer_files(files_list(p_github), types)
 
-        if(github_files.count(filename_noindex) == 0):
-            # File does not exists in github = Add file          
-            update = True
-            source = os.path.join(path_root, filename)
-            destiny = os.path.join(path_github, filename_noindex)
-            shutil.copyfile(source, destiny)
-            print_info(f'  >>> New file at github: "{filename_noindex}"')
-            new_github = new_github + 1
+        # From project to GitHub    
+        for filename in root_files:
+            filename_noindex = remove_index(filename)
 
-        else:
-            # File exists in github = Check if need to update
-            os.chdir(path_root)
-            project_epoch = int(os.path.getmtime(filename))
-
-            os.chdir(path_github)
-            github_epoch = int(os.path.getmtime(filename_noindex))
-
-            if(project_epoch > github_epoch):
+            if(github_files.count(filename_noindex) == 0):
+                # File does not exists in github = Add file          
                 update = True
-                source = os.path.join(path_root, filename)
-                destiny = os.path.join(path_github, filename_noindex)
+                source = os.path.join(p_root, filename)
+                destiny = os.path.join(p_github, filename_noindex)
                 shutil.copyfile(source, destiny)
-                print_info(f'  >>> Updated file at github: "{filename_noindex}"')
-                mod_github = mod_github + 1
+                print_info(f'  >>> New file at github: "{filename_noindex}"')
+                new_github = new_github + 1
 
-               
+            else:
+                # File exists in github = Check if need to update
+                os.chdir(p_root)
+                project_epoch = int(os.path.getmtime(filename))
+
+                os.chdir(p_github)
+                github_epoch = int(os.path.getmtime(filename_noindex))
+
+                if(project_epoch > github_epoch):
+                    update = True
+                    source = os.path.join(p_root, filename)
+                    destiny = os.path.join(p_github, filename_noindex)
+                    shutil.copyfile(source, destiny)
+                    print_info(f'  >>> Updated file at github: "{filename_noindex}"')
+                    mod_github = mod_github + 1
+
+
     if(update == True):
         print("")
-
     
-
+  
 # Print sum up of actions ----------------------------------------------
 print("")
 print(f">  New files added to GitHub: {new_github}")
