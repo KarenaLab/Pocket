@@ -1,19 +1,5 @@
 # GitHub Organizer (P249) ----------------------------------------------
 
-# Versions -------------------------------------------------------------
-# 01 - Dec 05th, 2022 - starter.
-# 02 - Dec 06th, 2022 - adjusting parameters and added a timer in the
-#                       end of the program.
-# 03 - Dec 10th, 2022 - Adjusting
-# 04 - Dec 30th, 2022 - Adding .txt function
-# 05 - Jan 10th, 2023 - Adjusting name extension
-# 06 - Jan 28th, 2023 - Adding a module option
-# 07 - Feb 10th, 2023 - Sync github and module update
-#
-# 10 - Mar 21th, 2023 - Adding two destinies (Zen-14 and Book2)
-# 11 - May 02nd, 2023 - Adjust for new github settings
-# 12 - Sep 07th, 2023 - Add sum up of actions
-
 
 # Upgrades
 # Read an external .json/.txt/.csv with folders data - v04 [Dec 30th, 2022]
@@ -30,21 +16,13 @@ import shutil
 import socket
 from time import sleep
 
-#import colorama
-#from colorama import Fore, Back, Style
-
-
 
 # Setup/Config
-#colorama.init(autoreset=True)
-
 path_script = os.getcwd()
-#path_modules = r"c:\python_modules"
 path_projects = r"D:\01 - Projects Binder"
 
 
 # Functions
-
 def pc_choose():
     """
     Read PC and returns the folder to append to GitHub folder path.
@@ -61,6 +39,7 @@ def pc_choose():
     else:
         github_prefix = None
         print(f" *** Error: PC not registered for github sync {pc_name} ***")
+
 
     return github_prefix
     
@@ -98,6 +77,7 @@ def read_txt(filename, lines=5, verbose=False):
     if(verbose == True):
         print(f" > Number of folders to compare and transfer: {steps}")
 
+
     return info_list    
     
 
@@ -107,21 +87,21 @@ def files_list(path=None):
     or the current path.
     
     """
-    if(path != None):
-        path_comeback = os.getcwd()
+    # Path preparation
+    path_comeback = os.getcwd()
+    if(path != None):        
         os.chdir(path)
 
-    content = os.listdir()
-    
-    files_list = []
-    for f in content:
+    # Files searcher
+    f_list = list()
+    for f in os.listdir():
         if(os.path.isfile(f) == True):
-            files_list.append(f)
+            f_list.append(f)
 
-    if(path != None):
-        os.chdir(path_comeback)
+
+    os.chdir(path_comeback)
         
-    return files_list
+    return f_list
 
 
 def folders_list(path=None):
@@ -130,21 +110,21 @@ def folders_list(path=None):
     or the current path.
     
     """
-    if(path != None):
-        path_comeback = os.getcwd()
+    # Path preparation
+    path_comeback = os.getcwd()
+    if(path != None):        
         os.chdir(path)
 
-    content = os.listdir()
-    
-    folders_list = []
-    for f in content:
+    # Files searcher
+    f_list = list()
+    for f in os.listdir():
         if(os.path.isdir(f) == True):
-            folders_list.append(f)
+            f_list.append(f)
 
-    if(path != None):
-        os.chdir(path_comeback)
+
+    os.chdir(path_comeback)
         
-    return folders_list
+    return f_list
 
 
 def transfer_files(file_list, enable_types):
@@ -166,7 +146,6 @@ def transfer_files(file_list, enable_types):
         ext = ext.replace(".", "")
         
         enable_types.append(ext)
-
 
     # Select files with extensions enabled
     new_list = []
@@ -191,26 +170,6 @@ def transfer_files(file_list, enable_types):
 
     
     return new_list
-
-
-def prepare_module_files(text):
-    """
-    Receives a string from paths_to_sync.txt and transforms into data
-    to be processed.
-
-    """
-    if(text == "None"):
-        module_files = []
-
-    else:
-        module_files = []
-
-        text = text.split(",")       
-        for i in text:
-            new_file = i.strip()
-            module_files.append(new_file)
-
-    return module_files
 
 
 def remove_index(filename):
@@ -327,38 +286,35 @@ print("\n ****  Auto Github 2 | Sync project and github folders  ****")
 print(" ****              Samsung Galaxy Book 2 360            ****\n")           
 
 # Folders to sync (External info from .txt.
-#   name: Name of the folder, suggestion: Folder path,
-#  types: String with the types (extensions) that will be sync,
-#   root: Folder from Project (Source),
-# github: Folder from github (Destiny),
-# module: File(s) to be sync with C:\python_modules
+#    name: Name of the folder, suggestion: Folder path,
+#   types: String with the types (extensions) that will be sync,
+#    root: Folder from Project (Source),
+# folders: Sub folders to be included in export,
+#  github: Folder from github (Destiny),
+
 
 # External information
 filename = "paths_for_sync.txt"
 buffer = read_txt(filename)
 github_prefix = pc_choose()
 
-# Getting information from modules folder
-#module_lake = files_list(path_modules)
 
-new_github = 0
-mod_github = 0
-
+# Inputation and modification indexes
+new_github, mod_github = 0, 0
 
 for i in range(0, len(buffer)):
     data = buffer[i]
-
+    
     print(f'> Folder {data["name"]}')
     update = False
-    
+   
     types = data["types"]
     path_root = data["root"]
     path_github = os.path.join(github_prefix, data["github"])
-    
     os.chdir(path_root)
+   
     root_files = transfer_files(files_list(), types)
     github_files = transfer_files(files_list(path_github), types)
-    module_files = prepare_module_files(data["module"])
 
     # From project to GitHub    
     for filename in root_files:
@@ -389,39 +345,11 @@ for i in range(0, len(buffer)):
                 print_info(f'  >>> Updated file at github: "{filename_noindex}"')
                 mod_github = mod_github + 1
 
-        """
-        if(module_files.count(filename_noindex) == 1):
-            # File to be copied to modules lake
-
-            if(module_lake.count(filename_noindex) == 0):
-                # File does not exists in modules lake = Add file          
-                update = True
-                source = os.path.join(path_root, filename)
-                destiny = os.path.join(path_modules, filename_noindex)
-                shutil.copyfile(source, destiny)
-                print_info(f'  >>> New file at modules lake: "{filename_noindex}"')
-                new_module = new_module + 1
-
-            else:
-                # File exists in modules lake = Check if need to update
-                os.chdir(path_root)
-                project_epoch = int(os.path.getmtime(filename))
-
-                os.chdir(path_modules)
-                github_epoch = int(os.path.getmtime(filename_noindex))
-
-                if(project_epoch > github_epoch):
-                    update = True
-                    source = os.path.join(path_root, filename)
-                    destiny = os.path.join(path_modules, filename_noindex)
-                    shutil.copyfile(source, destiny)
-                    print_info(f'  >>> Updated file at modules lake: "{filename_noindex}"')
-                    mod_module = mod_module + 1
-        """
                
     if(update == True):
         print("")
 
+    
 
 # Print sum up of actions ----------------------------------------------
 print("")
