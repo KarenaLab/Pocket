@@ -334,6 +334,9 @@ for i in range(0, len(buffer)):
     # Upload data slice from buffer (dict)
     data = buffer[i]
 
+    print(f'> Folder {data["name"]}')
+    update = False
+
     types = data["types"]
     path_root = data["root"]
     path_github = os.path.join(github_prefix, data["github"])
@@ -343,9 +346,6 @@ for i in range(0, len(buffer)):
     path_github = prepare_folders(path_github, folders)
 
     for p_root, p_github in zip(path_root, path_github):
-        print(f'> Folder {data["name"]}')
-        update = False
-
         os.chdir(p_root)
         
         root_files = transfer_files(files_list(), types)        
