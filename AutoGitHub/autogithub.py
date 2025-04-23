@@ -3,9 +3,9 @@
 # Upgrades
 # Read an external .json/.txt/.csv with folders data - v04 [Dec 30th, 2022]
 # Automatic remove of files at github that are not at folder
-# Add an option to consider folders, or a list of folders (bigger projects)
+# Add an option to consider folders, or a list of folders (bigger projects) [Apr 19th, 2025]
 # Remove single files in GitHub.
-#
+
 
 
 # Libraries
