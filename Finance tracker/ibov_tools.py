@@ -29,9 +29,13 @@ def ibov_tickers():
             "CPFE3.SA", "ELET3.SA", "BBDC4.SA", "GGBR4.SA", "CMIG4.SA",
             "BRAP4.SA", "CPLE6.SA", "BRKM5.SA", "ABEV3.SA", "BRFS3.SA",
             "CCRO3.SA", "EQTL3.SA", "EMBR3.SA", "BBSE3.SA", "CSAN3.SA",
-            "CSNA3.SA", "CYRE3.SA", "ECOR3.SA", "BBAS3.SA", "BBAS3.SA",
-            "SUZB3.SA", "BBSE3.SA", "PETR4.SA", "SLCE3.SA", "VALE3.SA",
-            "ALUP11.SA", "KLBN11.SA"]
+            "CSNA3.SA", "CYRE3.SA", "ECOR3.SA", "BBAS3.SA", "JBSS3.SA",
+            "SUZB3.SA", "PETR4.SA", "SLCE3.SA", "VALE3.SA", "CXSE3.SA",
+            "MRFG3.SA", "PETZ3.SA", "PSSA3.SA", "NTCO3.SA", "PETR3.SA",
+            "TOTS3.SA", "MRVE3.SA", "WEGE3.SA", "MGLU3.SA", "LREN3.SA",
+            "RAIZ4.SA", "ELET6.SA", "UGPA3.SA", "SBSP3.SA", "STBP3.SA",
+            "AZUL4.SA",
+            "ALUP11.SA", "KLBN11.SA", "SANB11.SA", "TAEE11.SA"]
 
     return ibov
 
@@ -66,9 +70,9 @@ def get_values(ticker, start, end):
 
 # Testing
 if(__name__ == "__main__"):
-    for i in ibov_tickers():
-        info = get_values(i, start="2025-01-01", end="2025-05-01")
-        print(info)
+    pass
+    
+        
 
 
         
