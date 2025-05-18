@@ -1,20 +1,18 @@
-# [Pxxx] Project name
-# (optional) Short description of the program/module.
-
+# [P519] Finance Tracker
 
 # Libraries
 import os
-import sys
 
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
 
+import yfinance as yf
+
 import matplotlib.pyplot as plt
 
 
 # Personal modules
-sys.path.append(r"c:\python_modules")
 
 
 # Functions
