@@ -1,8 +1,7 @@
-# [Pxxx] Project name
-# (optional) Short description
+# [P519] Finance Tracker
 
 # Versions
-# 01 - Date - Starter
+# 01 - May 17th, 2025 - Starter
 # 02 -
 
 
@@ -14,6 +13,8 @@
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
+
+import yfinance as yf
 
 import matplotlib.pyplot as plt
 
