@@ -39,6 +39,11 @@ def ibov_tickers():
 
     return ibov
 
+def others_tickers():
+    items = ["SGO.PA"]
+
+    return items
+
 
 def get_values(ticker, start, end):
     # Datetime preparation
@@ -70,7 +75,9 @@ def get_values(ticker, start, end):
 
 # Testing
 if(__name__ == "__main__"):
-    pass
+    for i in others_tickers():
+        info = get_values(i, start="2025-01-01", end="2025-05-01")
+        print(info)
     
         
 
