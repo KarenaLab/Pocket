@@ -24,6 +24,18 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
+def ibov_tickers():
+    ibov = ["^BVSP",
+            "CPFE3.SA", "ELET3.SA", "BBDC4.SA", "GGBR4.SA", "CMIG4.SA",
+            "BRAP4.SA", "CPLE6.SA", "BRKM5.SA", "ABEV3.SA", "BRFS3.SA",
+            "CCRO3.SA", "EQTL3.SA", "EMBR3.SA", "BBSE3.SA", "CSAN3.SA",
+            "CSNA3.SA", "CYRE3.SA", "ECOR3.SA", "BBAS3.SA", "BBAS3.SA",
+            "SUZB3.SA", "BBSE3.SA", "PETR4.SA", "SLCE3.SA", "VALE3.SA",
+            "ALUP11.SA", "KLBN11.SA"]
+
+    return ibov
+
+
 def get_values(ticker, start, end):
     # Datetime preparation
     start = dt.datetime.strptime(start, "%Y-%m-%d")
@@ -54,6 +66,10 @@ def get_values(ticker, start, end):
 
 # Testing
 if(__name__ == "__main__"):
-    info = get_values("ITUB3.SA", start="2024-01-01", end="2025-05-17")
-    print(info)
+    for i in ibov_tickers():
+        info = get_values(i, start="2025-01-01", end="2025-05-01")
+        print(info)
+
+
+        
 
