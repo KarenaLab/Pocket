@@ -45,7 +45,6 @@ def get_values(ticker, start, end):
         
     data.columns = [_prep_name(i) for i in data.columns]
 
-
     # Remove not used columns
     data = data.drop(columns=["adj_close"])
 
