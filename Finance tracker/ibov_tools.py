@@ -62,12 +62,16 @@ def get_values(ticker, start, end):
         value = value.replace(" ", "_")
 
         return value
-
-        
+       
     data.columns = [_prep_name(i) for i in data.columns]
 
     # Remove not used columns
     data = data.drop(columns=["adj_close"])
+
+    # Value Adjust (Round)
+    decimals = 3
+    for col in data.columns:
+        data[col] = np.round(data[col], decimals=decimals)
 
     
     return data    
@@ -75,7 +79,7 @@ def get_values(ticker, start, end):
 
 # Testing
 if(__name__ == "__main__"):
-    for i in others_tickers():
+    for i in ibov_tickers():
         info = get_values(i, start="2025-01-01", end="2025-05-01")
         print(info)
     
