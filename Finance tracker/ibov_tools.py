@@ -110,6 +110,11 @@ def calc_profit(name, value_buy, value_sell, date_buy, date_sell, decimals=4):
     return results
 
 
+def _decimal_to_pct(value, decimals=6):
+    pct = np.round(value * 100, decimals=decimals)
+
+    return pct
+
 
 # Testing
 if(__name__ == "__main__"):
