@@ -82,6 +82,35 @@ def get_values(ticker, start, end):
     return data    
 
 
+def calc_profit(name, value_buy, value_sell, date_buy, date_sell, decimals=4):
+    # Date preparation
+    date_buy = dt.datetime.strptime(date_buy, "%Y-%m-%d")
+    date_sell = dt.datetime.strptime(date_sell, "%Y-%m-%d")
+    date_delta = (date_sell - date_buy).days
+
+
+    # Calculation 
+    # Profit of operation
+    profit_delta = (value_sell / value_buy) - 1
+    profit_delta = _decimal_to_pct(profit_delta, decimals)
+    
+    # Eq: value_sell = value_buy * (1 + x)^(period)
+    profit_day = ((value_sell / value_buy) ** (1 / date_delta)) - 1
+    profit_month = ((1 + profit_day) ** 30) - 1
+    profit_month = _decimal_to_pct(profit_month, decimals)
+    
+    # Results
+    results = dict()
+    results["name"] = name
+    results["date_delta"] = date_delta
+    results["profit_delta"] = profit_delta
+    results["profit_eq_month"] = profit_month
+
+    
+    return results
+
+
+
 # Testing
 if(__name__ == "__main__"):
     for i in ibov_tickers():
