@@ -116,6 +116,91 @@ def _decimal_to_pct(value, decimals=6):
     return pct
 
 
+def effective_return(init, final, end_date, tax, start_date=None):
+    """
+    Calculates the effective investiment return for a Brazilian
+    prefixed bonds.
+
+    Arguments:
+    * init = Initial value of investiment (BRL),
+    * final = Final value of investiment (BRL),
+    * start_date = Date of investiment. If this value is None, will be
+                   assumption of the current date (now),
+    * end_date = Date of payment of Bonds (future date),
+    * tax = Tax applied for the profit (%),
+
+    """
+    # Datetime preparation
+    if(start_date == None):
+        start_date = dt.datetime.now()
+        start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    end_date = dt.datetime.strptime(end_date, "%Y-%m-%d")
+
+    
+    # All period tax   
+    #                     Final - ((Final - Init) * 0.15)
+    # Eq: (1 + it)^(1) = ---------------------------------
+    #                                Init
+    it = ((final - ((final - init) * tax)) / init) - 1
+
+    # Period in months
+    # Eq: (1 + it) ^ (1) = (1 + im) ^ months
+    n_months = count_months(start_date, end_date)
+    im = ((1 + it) ** (1/n_months)) - 1
+
+    # months to year
+    # Eq: (1 + im) ^12 = (1 + iy)
+    iy = ((1 + im) ** 12) - 1
+
+    # Output
+    results = dict()
+    results["im"] = im
+    results["iy"] = iy
+
+
+    return results
+
+
+def count_months(start_date, end_date):
+    # Date preparation
+    if(isinstance(start_date, str) == True):
+        start_date = dt.datetime.strptime(start_date, "%Y-%m-%d")
+
+    if(isinstance(end_date, str) == True):
+        end_date = dt.datetime.strptime(end_date, "%Y-%m-%d")
+
+    # Number of months of period
+    start_date = increase_month(start_date)
+
+    n_months = 0
+    while(True):
+        if(start_date <= end_date):
+            start_date = increase_month(start_date)
+            n_months = n_months + 1
+
+        else:
+            break
+
+    return n_months
+
+    
+def increase_month(date):
+    # Reference day as first day of the month
+    date = date.replace(day=1)
+    
+    start_month = date.month
+    if(start_month < 12):
+        date = date.replace(month=start_month+1)
+
+    else: # start_month = 12
+        start_year = date.year
+        date = date.replace(year=start_year+1, month=1)
+
+    return date
+
+
+
 # Testing
 if(__name__ == "__main__"):
     for i in ibov_tickers():
