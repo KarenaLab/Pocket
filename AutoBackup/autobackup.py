@@ -291,13 +291,13 @@ path_source = [r"D:\01 - Projects Binder",
                r"D:\10 - Images",
                r"D:\99 - INBOX"]
 
-path_destiny = [r"E:\Book2\01 - Projects Binder",
-                r"E:\Book2\04 - Data Science",
-                r"E:\Book2\05 - DataDNA",
-                r"E:\Book2\06 - Samsung SRBR",
-                r"E:\Book2\09 - Documents",
-                r"E:\Book2\10 - Images",
-                r"E:\Book2\99 - INBOX"]
+path_destiny = [r"G:\Book2\01 - Projects Binder",
+                r"G:\Book2\04 - Data Science",
+                r"G:\Book2\05 - DataDNA",
+                r"G:\Book2\06 - Samsung SRBR",
+                r"G:\Book2\09 - Documents",
+                r"G:\Book2\10 - Images",
+                r"G:\Book2\99 - INBOX"]
 
 
 # Backup Files
@@ -308,7 +308,7 @@ for source, destiny in zip(path_source, path_destiny):
 
 # Log with sizes
 backup_size = 0
-backup_address = [r"E:\Book2", r"E:\Storage_OUT"]
+backup_address = [r"G:\Book2", r"G:\Storage_OUT"]
 for path in backup_address:
     os.chdir(path)
     path_size = get_size(verbose=False)
